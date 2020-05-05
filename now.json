@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "env": {
+    "MONGODB_URI": "@my-mongodb-uri",
+    "PING_CW": "@ping-cw"
+  }
+}

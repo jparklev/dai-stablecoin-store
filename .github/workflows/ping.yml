@@ -1,0 +1,23 @@
+name: ping
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+
+jobs:
+  triggers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - shell: bash
+        env:
+          PING_API_PW: ${{ secrets.PING_API_PW }}
+        run: |
+          date && curl --header "Content-Type: application/json" \
+            --request POST \
+            --data '{"codeword":"'"$PING_API_PW"'"}' \
+            https://dai-stablecoin-store.now.sh/api/sync
+      - shell: bash
+        run: |
+          curl https://dai-stablecoin-store.now.sh/api/trades > /dev/null
